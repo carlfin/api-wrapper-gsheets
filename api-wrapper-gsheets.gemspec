@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
     "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
+    "api-wrapper-gsheets.gemspec",
     "lib/api-wrapper-gsheets.rb",
     "lib/api_wrapper_gsheet/client.rb",
     "lib/api_wrapper_gsheet/indexed_data.rb"
