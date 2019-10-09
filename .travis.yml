@@ -1,0 +1,3 @@
+jobs:
+  include:
+    - script: bundle exec rspec # run spec inside bundler environment
