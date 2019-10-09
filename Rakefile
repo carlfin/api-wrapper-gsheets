@@ -16,8 +16,8 @@ Juwelier::Tasks.new do |gem|
   gem.name = "row-crud-gsheet"
   gem.homepage = "http://github.com/carlfin/row-crud-gsheet"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{CRUD operations on rows of a G-Sheet}
+  gem.description = %Q{Provides convenience wrapped around google-api-client to access rows of Gsheet for CRUD operations}
   gem.email = "riess@carlfinance.de"
   gem.authors = ["Christoph Rieß"]
 
