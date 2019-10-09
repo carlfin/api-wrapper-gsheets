@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
-    "lib/api-wrapper-gsheets.rb",
+    "lib/row-crud-gsheet.rb",
     "lib/row_crud_gsheet/client.rb",
     "lib/row_crud_gsheet/indexed_data.rb",
     "row-crud-gsheet.gemspec",
