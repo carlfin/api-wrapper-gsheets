@@ -14,5 +14,5 @@ Description goes here.
 
 == Copyright
 
-Copyright (c) 2019 Christoph Rieß. See LICENSE.txt for
+Copyright (c) 2019 Carl Finance GmbH. See LICENSE.txt for
 further details.
