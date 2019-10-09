@@ -16,7 +16,6 @@ Gem::Specification.new do |s|
   s.email = "riess@carlfinance.de".freeze
   s.extra_rdoc_files = [
     "LICENSE",
-    "LICENSE.txt",
     "README.rdoc"
   ]
   s.files = [
@@ -27,7 +26,6 @@ Gem::Specification.new do |s|
     "Gemfile",
     "Gemfile.lock",
     "LICENSE",
-    "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
     "VERSION",
@@ -49,6 +47,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<googleauth>.freeze, [">= 0"])
       s.add_runtime_dependency(%q<google-api-client>.freeze, [">= 0"])
       s.add_runtime_dependency(%q<activesupport>.freeze, [">= 0"])
+      s.add_runtime_dependency(%q<lz4-ruby>.freeze, [">= 0"])
       s.add_development_dependency(%q<shoulda>.freeze, [">= 0"])
       s.add_development_dependency(%q<rdoc>.freeze, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>.freeze, ["~> 1.0"])
@@ -58,6 +57,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<googleauth>.freeze, [">= 0"])
       s.add_dependency(%q<google-api-client>.freeze, [">= 0"])
       s.add_dependency(%q<activesupport>.freeze, [">= 0"])
+      s.add_dependency(%q<lz4-ruby>.freeze, [">= 0"])
       s.add_dependency(%q<shoulda>.freeze, [">= 0"])
       s.add_dependency(%q<rdoc>.freeze, ["~> 3.12"])
       s.add_dependency(%q<bundler>.freeze, ["~> 1.0"])
@@ -68,6 +68,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<googleauth>.freeze, [">= 0"])
     s.add_dependency(%q<google-api-client>.freeze, [">= 0"])
     s.add_dependency(%q<activesupport>.freeze, [">= 0"])
+    s.add_dependency(%q<lz4-ruby>.freeze, [">= 0"])
     s.add_dependency(%q<shoulda>.freeze, [">= 0"])
     s.add_dependency(%q<rdoc>.freeze, ["~> 3.12"])
     s.add_dependency(%q<bundler>.freeze, ["~> 1.0"])
