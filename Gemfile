@@ -3,6 +3,9 @@ source "https://rubygems.org"
 # Example:
 #   gem "activesupport", ">= 2.3.5"
 
+gem 'google-api-client'
+gem 'activesupport'
+
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
 group :development do
