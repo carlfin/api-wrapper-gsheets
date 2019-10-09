@@ -4,40 +4,43 @@ module RowCrudGsheet
   class Client
     BATCH_SIZE = 512
 
-    attr_reader :service, :sheet_key
+    attr_reader :service, :document_id, :sheet_name
 
-    def initialize(sheet_key)
+    def initialize(document_id, sheet_name)
       @service = Google::Apis::SheetsV4::SheetsService.new
       @service.authorization = Google::Auth::ServiceAccountCredentials.make_creds(
         json_key_io: StringIO.new(ENV.fetch('GSHEET_AUTH_JSON')),
         scope: Google::Apis::SheetsV4::AUTH_SPREADSHEETS
       )
-      @sheet_key = sheet_key
+      @document_id = document_id
+      @sheet_name = sheet_name
     end
 
     def update_spreadsheet_values(range, values)
-      service.update_spreadsheet_value(sheet_key, 'data!' + range, values, value_input_option: 'USER_ENTERED')
+      service.update_spreadsheet_value(document_id, "#{sheet_name}!" + range, values, value_input_option: 'USER_ENTERED')
     end
 
     def append_spreadsheet_values(values)
-      service.append_spreadsheet_value(sheet_key, 'data', values, value_input_option: 'USER_ENTERED')
+      service.append_spreadsheet_value(document_id, sheet_name, values, value_input_option: 'USER_ENTERED')
     end
 
-    def get_spreadsheet_values
-      max = service.get_spreadsheet_values(sheet_key, 'data!A:A').values.size
+    def get_spreadsheet_values(header_rows: 1)
+      max = service.get_spreadsheet_values(document_id, "#{sheet_name}!A:A").values.size - header_rows
       index = SheetdataIndex.new
-      ((max / BATCH_SIZE) + 1).times.each_with_object([]) do |i, indexed|
+      offset = 0
+      while offset < max do
         index.append_data(
           service.get_spreadsheet_values(
-            sheet_key,
-            "data!#{i * BATCH_SIZE + 1}:#{(i + 1) * BATCH_SIZE + 1}"
+            document_id,
+            "data!#{offset + 1 + header_rows}:#{offset + BATCH_SIZE + header_rows}"
           ).values
         )
+        offset =+ BATCH_SIZE
       end
       index
     end
 
-    def get_spreadsheet_values_indexed(index_key = 'Deal ID')
+    def get_spreadsheet_values_indexed(index_key = 'ID')
       values = get_spreadsheet_values
       headers = values.shift
       index_column = headers.index(index_key)
@@ -56,7 +59,7 @@ module RowCrudGsheet
     end
 
     def sheet_id
-      @sheet_id ||= service.get_spreadsheet(sheet_key).sheets.map(&:properties).map(&:to_h).find { |s| s[:title] == 'data' }[:sheet_id]
+      @sheet_id ||= service.get_spreadsheet(document_id).sheets.map(&:properties).map(&:to_h).find { |s| s[:title] == sheet_name }[:sheet_id]
     end
 
     def delete_rows(indices)
@@ -74,7 +77,7 @@ module RowCrudGsheet
           }
         end
       }
-      service.batch_update_spreadsheet(sheet_key, request_body, {})
+      service.batch_update_spreadsheet(document_id, request_body, {})
       indices
     end
 
@@ -93,7 +96,7 @@ module RowCrudGsheet
           }
         ]
       }
-      service.batch_update_spreadsheet(sheet_key, request_body, {})
+      service.batch_update_spreadsheet(document_id, request_body, {})
       index
     end
   end
