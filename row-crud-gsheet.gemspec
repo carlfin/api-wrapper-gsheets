@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib".freeze]
   s.authors = ["Christoph Rie\u00DF".freeze]
   s.date = "2019-10-09"
-  s.description = "TODO: longer description of your gem".freeze
+  s.description = "Wrapper around google-api-client to access Gsheet tables in a CRUD-way by the row".freeze
   s.email = "riess@carlfinance.de".freeze
   s.extra_rdoc_files = [
     "LICENSE",
