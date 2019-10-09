@@ -13,8 +13,8 @@ require 'rake'
 require 'juwelier'
 Juwelier::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://guides.rubygems.org/specification-reference/ for more options
-  gem.name = "api-wrapper-gsheets"
-  gem.homepage = "http://github.com/carlfin/api-wrapper-gsheets"
+  gem.name = "row-crud-gsheet"
+  gem.homepage = "http://github.com/carlfin/row-crud-gsheet"
   gem.license = "MIT"
   gem.summary = %Q{TODO: one-line summary of your gem}
   gem.description = %Q{TODO: longer description of your gem}
@@ -44,7 +44,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "api-wrapper-gsheets #{version}"
+  rdoc.title = "row-crud-gsheet #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
