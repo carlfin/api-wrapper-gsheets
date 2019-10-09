@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib".freeze]
   s.authors = ["Christoph Rie\u00DF".freeze]
   s.date = "2019-10-09"
-  s.description = "Wrapper around google-api-client to access Gsheet tables in a CRUD-way by the row".freeze
+  s.description = "TODO: longer description of your gem".freeze
   s.email = "riess@carlfinance.de".freeze
   s.extra_rdoc_files = [
     "LICENSE",
@@ -46,12 +46,16 @@ Gem::Specification.new do |s|
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<google-api-client>.freeze, [">= 0"])
+      s.add_runtime_dependency(%q<activesupport>.freeze, [">= 0"])
       s.add_development_dependency(%q<shoulda>.freeze, [">= 0"])
       s.add_development_dependency(%q<rdoc>.freeze, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>.freeze, ["~> 1.0"])
       s.add_development_dependency(%q<juwelier>.freeze, ["~> 2.1.0"])
       s.add_development_dependency(%q<simplecov>.freeze, [">= 0"])
     else
+      s.add_dependency(%q<google-api-client>.freeze, [">= 0"])
+      s.add_dependency(%q<activesupport>.freeze, [">= 0"])
       s.add_dependency(%q<shoulda>.freeze, [">= 0"])
       s.add_dependency(%q<rdoc>.freeze, ["~> 3.12"])
       s.add_dependency(%q<bundler>.freeze, ["~> 1.0"])
@@ -59,6 +63,8 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<simplecov>.freeze, [">= 0"])
     end
   else
+    s.add_dependency(%q<google-api-client>.freeze, [">= 0"])
+    s.add_dependency(%q<activesupport>.freeze, [">= 0"])
     s.add_dependency(%q<shoulda>.freeze, [">= 0"])
     s.add_dependency(%q<rdoc>.freeze, ["~> 3.12"])
     s.add_dependency(%q<bundler>.freeze, ["~> 1.0"])
