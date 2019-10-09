@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib".freeze]
   s.authors = ["Christoph Rie\u00DF".freeze]
   s.date = "2019-10-09"
-  s.description = "TODO: longer description of your gem".freeze
+  s.description = "Provides convenience wrapped around google-api-client to access rows of Gsheet for CRUD operations".freeze
   s.email = "riess@carlfinance.de".freeze
   s.extra_rdoc_files = [
     "LICENSE",
@@ -40,7 +40,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/carlfin/row-crud-gsheet".freeze
   s.licenses = ["MIT".freeze]
   s.rubygems_version = "3.0.3".freeze
-  s.summary = "TODO: one-line summary of your gem".freeze
+  s.summary = "CRUD operations on rows of a G-Sheet".freeze
 
   if s.respond_to? :specification_version then
     s.specification_version = 4
