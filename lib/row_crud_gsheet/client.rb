@@ -99,5 +99,24 @@ module RowCrudGsheet
       service.batch_update_spreadsheet(document_id, request_body, {})
       index
     end
+
+    def delete_duplicates(uniques_key = 'ID')
+      values = get_spreadsheet_values(header_rows: 0)
+      headers = values.shift
+      index_offset = headers.index(uniques_key)
+      raise "column named `#{uniques_key}` not found." if index_offset.nil?
+      uniques = {}
+      deletables = []
+      pos = 0
+      values.each do |row|
+        if uniques[row[index_offset]].nil?
+          uniques[row[index_offset]] = true
+        else
+          deletables.push(pos + 1)
+        end
+        pos += 1
+      end
+      delete_rows(deletables)
+    end
   end
 end

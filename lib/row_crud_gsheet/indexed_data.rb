@@ -26,17 +26,15 @@ module RowCrudGsheet
 
     def each(&block)
       raw_data.each do |o|
-        Marshal.load(LZ4::uncompress(o)).each do |row|
-          yield row
-        end
+        data = o.is_a?(Array) ? o.last : o
+        yield Marshal.load(LZ4::uncompress(data))
       end
     end
 
     def each_with_object(object, &block)
-      raw_data.each do |o|
-        Marshal.load(LZ4::uncompress(o)).each do |row|
-          yield row, object
-        end
+      raw_data.each_with_object do |o, object|
+        data = o.is_a?(Array) ? o.last : o
+        yield Marshal.load(LZ4::uncompress(data)), object
       end
       object
     end
