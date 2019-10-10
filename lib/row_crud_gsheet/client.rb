@@ -29,13 +29,14 @@ module RowCrudGsheet
       index = SheetdataIndex.new
       offset = 0
       while offset < max do
+        puts "added batch #{offset}"
         index.append_data(
           service.get_spreadsheet_values(
             document_id,
             "#{sheet_name}!#{offset + 1 + header_rows}:#{offset + BATCH_SIZE + header_rows}"
           ).values
         )
-        offset =+ BATCH_SIZE
+        offset += BATCH_SIZE
       end
       index
     end
