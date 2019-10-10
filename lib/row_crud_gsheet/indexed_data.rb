@@ -18,7 +18,9 @@ module RowCrudGsheet
           raw_data[o.delete_at(key_column)] = LZ4::compress(Marshal.dump(o))
         end
       else
-        raw_data.push(LZ4::compress(Marshal.dump(block)))
+        block.each do |o|
+          raw_data.push(LZ4::compress(Marshal.dump(o)))
+        end
       end
     end
 
@@ -48,10 +50,7 @@ module RowCrudGsheet
     end
 
     def shift
-      updateable = Marshal.load(LZ4::uncompress(raw_data[0]))
-      select = updateable.shift
-      raw_data[0] = LZ4::compress(Marshal.dump(updateable))
-      select
+      Marshal.load(LZ4::uncompress(raw_data.shift))
     end
   end
 end

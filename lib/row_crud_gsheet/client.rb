@@ -32,7 +32,7 @@ module RowCrudGsheet
         index.append_data(
           service.get_spreadsheet_values(
             document_id,
-            "data!#{offset + 1 + header_rows}:#{offset + BATCH_SIZE + header_rows}"
+            "#{sheet_name}!#{offset + 1 + header_rows}:#{offset + BATCH_SIZE + header_rows}"
           ).values
         )
         offset =+ BATCH_SIZE
@@ -41,13 +41,12 @@ module RowCrudGsheet
     end
 
     def get_spreadsheet_values_indexed(index_key = 'ID')
-      values = get_spreadsheet_values
+      values = get_spreadsheet_values(header_rows: 0)
       headers = values.shift
-      index_column = headers.index(index_key)
-      index = SheetdataIndex.new(index_column)
+      index_offset = headers.index(index_key)
+      index = SheetdataIndex.new(index_offset)
       values.raw_data.each do |raw|
-        processed = Marshal.load(LZ4::uncompress(raw))
-        index.append_data(processed)
+        index.append_data([Marshal.load(LZ4::uncompress(raw))])
       end
       index
     end
@@ -63,6 +62,7 @@ module RowCrudGsheet
     end
 
     def delete_rows(indices)
+      indices = indices.sort.reverse
       request_body = {
         requests: indices.map do |index|
           {
