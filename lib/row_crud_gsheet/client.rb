@@ -29,7 +29,6 @@ module RowCrudGsheet
       index = SheetdataIndex.new
       offset = 0
       while offset < max do
-        puts "added batch #{offset}"
         index.append_data(
           service.get_spreadsheet_values(
             document_id,
