@@ -54,14 +54,16 @@ describe RowCrudGsheet::Client, 'Integration' do
   context 'data cleaning algorithms' do
     let!(:client) { described_class.new(ENV.fetch('TEST_DOCUMENT'), 'rspecmock_rw') }
     let!(:before_size) { client.get_spreadsheet_values.size }
-
-    it 'can delete dupes for a column' do
-      dupe = random_row.tap { |o| o[2] = rand(1_000_000).to_s }
-      col_name = Marshal::load(
+    let!(:col_name) do
+      Marshal::load(
         LZ4::uncompress(
           client.get_spreadsheet_values(header_rows: 0).raw_data.first
         )
       )[2]
+    end
+
+    it 'can delete dupes for a column' do
+      dupe = random_row.tap { |o| o[2] = rand(1_000_000).to_s }
       client.append_spreadsheet_values(values: [dupe, dupe, dupe])
       client.delete_duplicates(col_name)
 
@@ -69,6 +71,12 @@ describe RowCrudGsheet::Client, 'Integration' do
 
       # delete the newly introduced row
       client.delete_row((2..before_size).to_a.sample)
+    end
+
+    it 'can\'t delete dupes if none exists' do
+      client.delete_duplicates(col_name)
+
+      expect(client.get_spreadsheet_values.size).to be(before_size)
     end
   end
 end

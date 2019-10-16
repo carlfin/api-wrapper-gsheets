@@ -116,7 +116,7 @@ module RowCrudGsheet
         end
         pos += 1
       end
-      delete_rows(deletables)
+      delete_rows(deletables) unless deletables.empty?
     end
   end
 end
