@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Christoph Rie\u00DF".freeze]
-  s.date = "2019-10-09"
+  s.date = "2019-10-29"
   s.description = "Provides convenience wrapped around google-api-client to access rows of Gsheet for CRUD operations".freeze
   s.email = "riess@carlfinance.de".freeze
   s.extra_rdoc_files = [
@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
     ".document",
     ".rspec",
     ".ruby-version",
+    ".travis.yml",
     "CHANGELOG.md",
     "Gemfile",
     "Gemfile.lock",
@@ -33,7 +34,9 @@ Gem::Specification.new do |s|
     "lib/row_crud_gsheet/client.rb",
     "lib/row_crud_gsheet/indexed_data.rb",
     "row-crud-gsheet.gemspec",
-    "spec/spec_helper.rb"
+    "spec/integration/row_crud_gsheet/client_spec.rb",
+    "spec/spec_helper.rb",
+    "spec/unit/row_crud_gsheet/client_spec.rb"
   ]
   s.homepage = "http://github.com/carlfin/row-crud-gsheet".freeze
   s.licenses = ["MIT".freeze]
