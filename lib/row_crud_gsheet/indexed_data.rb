@@ -32,7 +32,7 @@ module RowCrudGsheet
     end
 
     def each_with_object(object, &block)
-      raw_data.each_with_object do |o, object|
+      raw_data.each_with_object(object) do |o, object|
         data = o.is_a?(Array) ? o.last : o
         yield Marshal.load(LZ4::uncompress(data)), object
       end
